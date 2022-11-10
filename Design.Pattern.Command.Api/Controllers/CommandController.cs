@@ -12,12 +12,18 @@ public class CommandController : ControllerBase
     {
         _receiver = receiver;
     }
-    
+
     [HttpPost]
     public IActionResult UpdateUserName(string name)
     {
-       var resultState = _receiver.Handle(new UpdateNameCommand(){Name = name});
-       return StatusCode(resultState.StatusCode, resultState.Message);
+        var resultState = _receiver.Handle(new UpdateNameCommand() { Name = name });
+        return StatusCode(resultState.StatusCode, resultState.Message);
     }
 
+    [HttpPost]
+    public IActionResult UpdateUserAge(int id, int age)
+    {
+        var resultState = _receiver.Handle(new UpdateAgeCommand() { Id = id, Age = age });
+        return StatusCode(resultState.StatusCode, resultState.Message);
+    }
 }
